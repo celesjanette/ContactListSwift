@@ -16,6 +16,9 @@
 		42886EDC2B97AFA4009CFAFF /* ContactListSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42886EDB2B97AFA4009CFAFF /* ContactListSwiftTests.swift */; };
 		42886EE62B97AFA4009CFAFF /* ContactListSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42886EE52B97AFA4009CFAFF /* ContactListSwiftUITests.swift */; };
 		42886EE82B97AFA4009CFAFF /* ContactListSwiftUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42886EE72B97AFA4009CFAFF /* ContactListSwiftUITestsLaunchTests.swift */; };
+		42E6C52D2BA9232A00C56808 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E6C52C2BA9232A00C56808 /* ContactsViewController.swift */; };
+		42E6C52F2BA9234A00C56808 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E6C52E2BA9234A00C56808 /* MapViewController.swift */; };
+		42E6C5312BA9237200C56808 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E6C5302BA9237200C56808 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		42886EE12B97AFA4009CFAFF /* ContactListSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContactListSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42886EE52B97AFA4009CFAFF /* ContactListSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListSwiftUITests.swift; sourceTree = "<group>"; };
 		42886EE72B97AFA4009CFAFF /* ContactListSwiftUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListSwiftUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		42E6C52C2BA9232A00C56808 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		42E6C52E2BA9234A00C56808 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		42E6C5302BA9237200C56808 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,9 @@
 		42886EC32B97AF9F009CFAFF /* ContactListSwift */ = {
 			isa = PBXGroup;
 			children = (
+				42E6C52C2BA9232A00C56808 /* ContactsViewController.swift */,
+				42E6C52E2BA9234A00C56808 /* MapViewController.swift */,
+				42E6C5302BA9237200C56808 /* SettingsViewController.swift */,
 				42886EC42B97AF9F009CFAFF /* AppDelegate.swift */,
 				42886EC62B97AF9F009CFAFF /* SceneDelegate.swift */,
 				42886EC82B97AF9F009CFAFF /* ViewController.swift */,
@@ -259,8 +268,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				42886EC92B97AF9F009CFAFF /* ViewController.swift in Sources */,
+				42E6C52D2BA9232A00C56808 /* ContactsViewController.swift in Sources */,
 				42886EC52B97AF9F009CFAFF /* AppDelegate.swift in Sources */,
+				42E6C52F2BA9234A00C56808 /* MapViewController.swift in Sources */,
 				42886EC72B97AF9F009CFAFF /* SceneDelegate.swift in Sources */,
+				42E6C5312BA9237200C56808 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
