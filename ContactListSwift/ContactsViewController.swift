@@ -18,7 +18,13 @@ class ContactsViewController: UIViewController {
         @IBOutlet weak var textFieldCellPhone: UITextField!
         @IBOutlet weak var textFieldHomePhone: UITextField!
         @IBOutlet weak var textFieldEmail: UITextField!
-        @IBOutlet weak var textFieldBirthday: UITextField!
+        @IBOutlet weak var sgmtEditMode: UISegmentedControl!
+        
+    @IBOutlet weak var btnChange: UISegmentedControl!
+    
+    @IBOutlet weak var bdaylabel: UILabel!
+    
+    
     override func viewDidLoad() {
             super.viewDidLoad()
             
@@ -71,11 +77,26 @@ class ContactsViewController: UIViewController {
         @objc func dismissKeyboard() {
             view.endEditing(true)
         }
-
-        // Do any additional setup after loading the view.
+    @IBAction func changeEditMode(_ sender: UISegmentedControl){
+        let textFields: [UITextField] = [textFieldContact, textFieldAddress, textFieldEmail, textFieldCity, textFieldState, textFieldZipCode, textFieldCellPhone, textFieldHomePhone]
+        if sender.selectedSegmentIndex == 0 {
+            for textField in textFields {
+                textField.isEnabled = false
+                textField.borderStyle = .none
+            }
+            btnChange.isHidden = true
+        } else if sender.selectedSegmentIndex == 1 {
+            for textField in textFields {
+                textField.isEnabled = true
+                textField.borderStyle = .roundedRect
+            }
+            btnChange.isHidden = false
+        }
     }
-    
+        // Do any additional setup after loading the view.
 
+    
+}
     /*
     // MARK: - Navigation
 
