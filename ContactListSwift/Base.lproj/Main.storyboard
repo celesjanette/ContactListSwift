@@ -184,6 +184,17 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="contacts" id="fv0-mU-dfb"/>
+                    <connections>
+                        <outlet property="scrollView" destination="m2U-Ay-AiJ" id="B7F-tZ-P2y"/>
+                        <outlet property="textFieldAddress" destination="dLV-In-le1" id="zE2-e4-TNb"/>
+                        <outlet property="textFieldCellPhone" destination="2oo-ja-UNB" id="ddE-cc-48b"/>
+                        <outlet property="textFieldCity" destination="HZt-Yo-LpM" id="1WT-l3-Aub"/>
+                        <outlet property="textFieldContact" destination="e0n-vD-ni9" id="1qj-iY-Voj"/>
+                        <outlet property="textFieldEmail" destination="zkA-Py-56M" id="wHb-W6-wQM"/>
+                        <outlet property="textFieldHomePhone" destination="gxr-I7-C2z" id="IVb-7e-Tmw"/>
+                        <outlet property="textFieldState" destination="f4v-i1-7M9" id="lI8-1T-Vfp"/>
+                        <outlet property="textFieldZipCode" destination="oms-UE-9Ly" id="Toi-1s-Grl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yUL-Cv-Mva" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
