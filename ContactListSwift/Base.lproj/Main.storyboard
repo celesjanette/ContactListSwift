@@ -23,8 +23,8 @@
                                     <segment title="Edit"/>
                                 </segments>
                             </segmentedControl>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m2U-Ay-AiJ">
-                                <rect key="frame" x="0.0" y="105" width="393" height="664"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m2U-Ay-AiJ">
+                                <rect key="frame" x="0.0" y="105" width="393" height="318"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="Tcr-sW-Cgd">
                                         <rect key="frame" x="10" y="0.0" width="373" height="297.66666666666669"/>
@@ -41,7 +41,7 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e0n-vD-ni9">
                                                         <rect key="frame" x="75.333333333333314" y="0.0" width="297.66666666666669" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -96,7 +96,7 @@
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2oo-ja-UNB">
                                                                 <rect key="frame" x="0.0" y="28.333333333333314" width="146.66666666666666" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="phonePad" smartInsertDeleteType="yes"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -112,7 +112,7 @@
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gxr-I7-C2z">
                                                                 <rect key="frame" x="0.0" y="28.333333333333314" width="196.33333333333334" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="phonePad" smartDashesType="yes"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -161,7 +161,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="2BR-uc-FUA" firstAttribute="trailing" secondItem="Tcr-sW-Cgd" secondAttribute="trailing" constant="10" id="6pt-gy-eR6"/>
-                                    <constraint firstAttribute="bottom" secondItem="Tcr-sW-Cgd" secondAttribute="bottom" constant="70.333333333333314" id="LqB-3G-Bsb"/>
+                                    <constraint firstAttribute="bottom" secondItem="Tcr-sW-Cgd" secondAttribute="bottom" id="LqB-3G-Bsb"/>
                                     <constraint firstItem="Tcr-sW-Cgd" firstAttribute="leading" secondItem="2BR-uc-FUA" secondAttribute="leading" constant="10" id="TOS-P0-jOH"/>
                                     <constraint firstAttribute="trailing" secondItem="Tcr-sW-Cgd" secondAttribute="trailing" constant="10" id="XvT-l0-B4O"/>
                                     <constraint firstItem="Tcr-sW-Cgd" firstAttribute="top" secondItem="EHq-4n-PYI" secondAttribute="top" id="jRR-mb-oyt"/>
