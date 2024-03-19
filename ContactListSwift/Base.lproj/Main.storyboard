@@ -23,20 +23,20 @@
                                     <segment title="Edit"/>
                                 </segments>
                             </segmentedControl>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Tcr-sW-Cgd">
-                                <rect key="frame" x="16" y="98" width="373" height="307.66666666666669"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Tcr-sW-Cgd">
+                                <rect key="frame" x="10" y="98" width="373" height="307.66666666666669"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="u8C-ye-bGa">
                                         <rect key="frame" x="0.0" y="0.0" width="373" height="34"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contacts:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGy-Er-gSZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="73.666666666666671" height="34"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGy-Er-gSZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="65.333333333333329" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e0n-vD-ni9">
-                                                <rect key="frame" x="83.666666666666657" y="0.0" width="289.33333333333337" height="34"/>
+                                                <rect key="frame" x="75.333333333333343" y="0.0" width="297.66666666666663" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -59,7 +59,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="p5N-mC-tdg">
-                                        <rect key="frame" x="0.0" y="97.999999999999986" width="373" height="34.000000000000014"/>
+                                        <rect key="frame" x="0.0" y="98" width="373" height="34"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="247" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HZt-Yo-LpM">
                                                 <rect key="frame" x="0.0" y="0.0" width="204" height="34"/>
@@ -71,7 +71,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oms-UE-9Ly">
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oms-UE-9Ly">
                                                 <rect key="frame" x="286" y="0.0" width="87" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -91,7 +91,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2oo-ja-UNB">
-                                                        <rect key="frame" x="0.0" y="28.333333333333329" width="146.66666666666666" height="34"/>
+                                                        <rect key="frame" x="0.0" y="28.333333333333314" width="146.66666666666666" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                     </textField>
@@ -107,7 +107,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gxr-I7-C2z">
-                                                        <rect key="frame" x="0.0" y="28.333333333333329" width="196.33333333333334" height="34"/>
+                                                        <rect key="frame" x="0.0" y="28.333333333333314" width="196.33333333333334" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                     </textField>
@@ -159,11 +159,11 @@
                         <viewLayoutGuide key="safeArea" id="qgo-WM-bnD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Tcr-sW-Cgd" firstAttribute="bottom" secondItem="J3I-RX-3dY" secondAttribute="bottom" constant="15" id="99h-kk-gxD"/>
-                            <constraint firstItem="qgo-WM-bnD" firstAttribute="trailing" secondItem="Tcr-sW-Cgd" secondAttribute="trailing" constant="10" id="GkJ-Tn-55T"/>
                             <constraint firstItem="J3I-RX-3dY" firstAttribute="top" secondItem="qgo-WM-bnD" secondAttribute="top" id="Ols-Nb-xkE"/>
-                            <constraint firstItem="Tcr-sW-Cgd" firstAttribute="leading" secondItem="qgo-WM-bnD" secondAttribute="leading" constant="10" id="l7x-3C-Fmq"/>
+                            <constraint firstItem="qgo-WM-bnD" firstAttribute="bottom" secondItem="Tcr-sW-Cgd" secondAttribute="bottom" constant="363.33333333333331" id="cfi-MW-cZk"/>
                             <constraint firstItem="J3I-RX-3dY" firstAttribute="centerX" secondItem="xZG-Hq-2gB" secondAttribute="centerX" id="tf2-S3-an8"/>
+                            <constraint firstItem="qgo-WM-bnD" firstAttribute="trailing" secondItem="Tcr-sW-Cgd" secondAttribute="trailing" constant="10" id="uxe-v4-byH"/>
+                            <constraint firstItem="Tcr-sW-Cgd" firstAttribute="leading" secondItem="qgo-WM-bnD" secondAttribute="leading" constant="10" id="ypd-br-juI"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="contacts" id="fv0-mU-dfb"/>
