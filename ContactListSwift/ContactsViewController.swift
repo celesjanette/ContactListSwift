@@ -27,7 +27,7 @@ class ContactsViewController: UIViewController {
     
     override func viewDidLoad() {
             super.viewDidLoad()
-            
+        self.view.addSubview(sgmtEditMode)
             // Add tap gesture recognizer to dismiss keyboard
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
             view.addGestureRecognizer(tapGesture)
@@ -45,6 +45,7 @@ class ContactsViewController: UIViewController {
             super.viewWillDisappear(animated)
             unregisterKeyboardNotifications()
         }
+    
 
         func registerKeyboardNotifications() {
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
@@ -84,7 +85,7 @@ class ContactsViewController: UIViewController {
                 textField.isEnabled = false
                 textField.borderStyle = .none
             }
-            btnChange.isHidden = true
+            btnChange.isHidden = false
         } else if sender.selectedSegmentIndex == 1 {
             for textField in textFields {
                 textField.isEnabled = true
