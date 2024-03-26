@@ -6,10 +6,15 @@
 //
 
 import UIKit
+protocol Birthdate: AnyObject {
+    func didSelectDate(_ date: Date)
+   
+}
 
 class ViewController: UIViewController {
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var datePicker: UIDatePicker!
+   
+   
+    //@IBOutlet weak var datePicker: UIDatePicker!
 
     override func viewDidLoad() {
         super.viewDidLoad()

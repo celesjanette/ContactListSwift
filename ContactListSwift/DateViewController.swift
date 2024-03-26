@@ -6,24 +6,31 @@
 //
 
 import UIKit
+protocol DateControllerDelegate: AnyObject {
+    func didSelectDate(_ date: Date)
+}
+
 
 class DateViewController: UIViewController {
+    weak var delegate: DateControllerDelegate?
 
+    @IBOutlet weak var dtpDate: UIDatePicker!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveDate))
+                navigationItem.rightBarButtonItem = saveButton
+                
+                title = "Pick Birthdate"
+   
     }
-    
+    @objc func saveDate() {
+         
+        delegate?.didSelectDate(dtpDate.date)
+           
+          
+           navigationController?.popViewController(animated: true)
+       }
+   }
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
-}

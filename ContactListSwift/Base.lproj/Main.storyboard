@@ -157,7 +157,7 @@
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Change"/>
                                                         <connections>
-                                                            <segue destination="r7U-dR-K62" kind="show" id="run-j7-j9v"/>
+                                                            <segue destination="r7U-dR-K62" kind="show" identifier="segueContactDate" id="run-j7-j9v"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -191,8 +191,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="Rhf-9R-gLp"/>
                     <connections>
-                        <outlet property="bdaylabel" destination="S3o-PY-Rns" id="yKc-eo-Enx"/>
-                        <outlet property="btnChange" destination="J3I-RX-3dY" id="OL9-EL-FcP"/>
+                        <outlet property="bdaylabel" destination="S3o-PY-Rns" id="1aR-az-vo3"/>
+                        <outlet property="btnChange" destination="YCg-Pm-vT9" id="eTe-Pn-LDi"/>
                         <outlet property="scrollView" destination="m2U-Ay-AiJ" id="B7F-tZ-P2y"/>
                         <outlet property="sgmtEditMode" destination="J3I-RX-3dY" id="22S-54-MNY"/>
                         <outlet property="textFieldAddress" destination="dLV-In-le1" id="zE2-e4-TNb"/>
@@ -212,7 +212,7 @@
         <!--Birthdate-->
         <scene sceneID="qEc-od-9ga">
             <objects>
-                <viewController title="Birthdate" id="r7U-dR-K62" sceneMemberID="viewController">
+                <viewController title="Birthdate" id="r7U-dR-K62" customClass="DateViewController" customModule="ContactListSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zlA-ah-KLX">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -231,6 +231,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1wN-y0-DYL"/>
+                    <connections>
+                        <outlet property="dtpDate" destination="1wd-uQ-mbY" id="zZG-Oy-G9N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKx-TB-OOv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -244,21 +247,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Igi-En-dJe">
-                                <rect key="frame" x="137.66666666666666" y="406" width="118" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fMu-z3-gGa">
+                                <rect key="frame" x="30" y="79" width="333" height="348.66666666666669"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort Order:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wlu-FY-pRS">
+                                        <rect key="frame" x="124" y="0.0" width="85" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyK-yo-c14">
+                                        <rect key="frame" x="6.6666666666666572" y="40.333333333333314" width="320" height="217"/>
+                                    </pickerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ascending Sort:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chg-1b-0bi">
+                                        <rect key="frame" x="106" y="277.33333333333331" width="121.33333333333331" height="20.333333333333314"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aSv-vc-uJE">
+                                        <rect key="frame" x="142" y="317.66666666666669" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="sortDirectionChanged:" destination="Ygg-Bs-5G8" eventType="valueChanged" id="eLx-Mh-tgZ"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TQ7-GE-uzm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Igi-En-dJe" firstAttribute="centerY" secondItem="yQ3-eY-Wlm" secondAttribute="centerY" id="BWR-Z6-mf3"/>
-                            <constraint firstItem="Igi-En-dJe" firstAttribute="centerX" secondItem="yQ3-eY-Wlm" secondAttribute="centerX" id="RqH-ql-vxp"/>
+                            <constraint firstItem="fMu-z3-gGa" firstAttribute="top" secondItem="TQ7-GE-uzm" secondAttribute="top" constant="20" id="Af2-o4-2kL"/>
+                            <constraint firstItem="fMu-z3-gGa" firstAttribute="leading" secondItem="TQ7-GE-uzm" secondAttribute="leading" constant="30" id="DoV-5M-ttY"/>
+                            <constraint firstItem="TQ7-GE-uzm" firstAttribute="bottom" secondItem="fMu-z3-gGa" secondAttribute="bottom" constant="341.32999999999998" id="gLZ-TP-8Bp"/>
+                            <constraint firstItem="TQ7-GE-uzm" firstAttribute="trailing" secondItem="fMu-z3-gGa" secondAttribute="trailing" constant="30" id="kJ4-iE-vng"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" selectedImage="settingsIcon" id="N55-Yv-oKs"/>
+                    <connections>
+                        <outlet property="pckSortField" destination="nyK-yo-c14" id="avD-WN-vW2"/>
+                        <outlet property="swAscending" destination="aSv-vc-uJE" id="RWJ-sa-AXc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JDE-je-UT8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
