@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		42076FAF2BB2FC0500E8ED57 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42076FAE2BB2FC0500E8ED57 /* DateViewController.swift */; };
+		425A9D862BB71CFE00E8B92A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425A9D852BB71CFE00E8B92A /* TableViewController.swift */; };
 		42886EC52B97AF9F009CFAFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42886EC42B97AF9F009CFAFF /* AppDelegate.swift */; };
 		42886EC72B97AF9F009CFAFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42886EC62B97AF9F009CFAFF /* SceneDelegate.swift */; };
 		42886EC92B97AF9F009CFAFF /* Birthdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42886EC82B97AF9F009CFAFF /* Birthdate.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		42076FAE2BB2FC0500E8ED57 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
+		425A9D852BB71CFE00E8B92A /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		42886EC12B97AF9F009CFAFF /* ContactListSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactListSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42886EC42B97AF9F009CFAFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42886EC62B97AF9F009CFAFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				42886ECD2B97AFA3009CFAFF /* Assets.xcassets */,
 				42886ECF2B97AFA3009CFAFF /* LaunchScreen.storyboard */,
 				42886ED22B97AFA3009CFAFF /* Info.plist */,
+				425A9D852BB71CFE00E8B92A /* TableViewController.swift */,
 			);
 			path = ContactListSwift;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				42886EC92B97AF9F009CFAFF /* Birthdate.swift in Sources */,
 				42E6C52D2BA9232A00C56808 /* ContactsViewController.swift in Sources */,
 				42886EC52B97AF9F009CFAFF /* AppDelegate.swift in Sources */,
+				425A9D862BB71CFE00E8B92A /* TableViewController.swift in Sources */,
 				42E6C52F2BA9234A00C56808 /* MapViewController.swift in Sources */,
 				42D87C492BB114FC000A4BBA /* Constants.swift in Sources */,
 				42886EC72B97AF9F009CFAFF /* SceneDelegate.swift in Sources */,
