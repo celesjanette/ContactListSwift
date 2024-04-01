@@ -7,7 +7,7 @@
 
 import UIKit
 import CoreData
-class ContactsViewController: UIViewController, DateControllerDelegate {
+class ContactsViewController: UIViewController, DateControllerDelegate, UITextFieldDelegate {
 
     var currentContact: Contact?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -33,119 +33,138 @@ class ContactsViewController: UIViewController, DateControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(sgmtEditMode)
-        //tap gesture recognizer to dismiss keyboard
+        
+       
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
-        
-        //register the  keyboard notifs
-        registerKeyboardNotifications()
-        // adding listeners to my textfields
-        changeEditMode(sgmtEditMode)
-                let textFields: [UITextField] = [textFieldContact, textFieldAddress, textFieldCity, textFieldState, textFieldZipCode, textFieldCellPhone, textFieldHomePhone, textFieldEmail]
-                for textField in textFields {
-                    textField.addTarget(self, action: #selector(textFieldDidEndEditing(_:)), for: .editingDidEnd)
-                }
-            }
-    @objc func textFieldDidEndEditing(_ textField: UITextField) -> Bool {
-        guard textField.text != nil else { return false }
-        
-        if currentContact == nil {
-            let context = appDelegate.persistentContainer.viewContext
-            currentContact = Contact(context: context)
-        }
-        
-        currentContact?.contactName = textFieldContact.text
-        currentContact?.streetAddress = textFieldAddress.text
-        currentContact?.city = textFieldCity.text
-        currentContact?.state = textFieldState.text
-        currentContact?.zipCode = textFieldZipCode.text
-        currentContact?.cellNumber = textFieldCellPhone.text
-        currentContact?.homeNumber = textFieldHomePhone.text
-        currentContact?.email = textFieldEmail.text
-        return true
-    }
-    @objc func saveContact() {
-        appDelegate.saveContext()
-        sgmtEditMode.selectedSegmentIndex = 0
-        changeEditMode(sgmtEditMode)
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueContactDate" {
-            if let dateController = segue.destination as? DateViewController {
-                dateController.delegate = self
-            }
-        }
-            }
-    func didSelectDate(_ date: Date) {
-        if currentContact == nil {
-            let context = appDelegate.persistentContainer.viewContext
-            currentContact = Contact(context: context)
-        }
-        currentContact?.birthday = date
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        bdaylabel.text = formatter.string(from: date)
-    }
+        let textFields: [UITextField] = [textFieldContact, textFieldAddress, textFieldCity, textFieldState, textFieldZipCode, textFieldCellPhone, textFieldHomePhone, textFieldEmail]
+               for textField in textFields {
+                   textField.delegate = self
+               }
+            
+               registerKeyboardNotifications()
+               
+               if let contact = currentContact {
+                   populateFields(with: contact)
+               }
+           }
+           
+           func populateFields(with contact: Contact) {
+               textFieldContact.text = contact.contactName
+               textFieldAddress.text = contact.streetAddress
+               textFieldCity.text = contact.city
+               textFieldState.text = contact.state
+               textFieldZipCode.text = contact.zipCode
+               textFieldCellPhone.text = contact.cellNumber
+               textFieldHomePhone.text = contact.homeNumber
+               textFieldEmail.text = contact.email
+               
+               if let birthday = contact.birthday {
+                   let formatter = DateFormatter()
+                   formatter.dateStyle = .short
+                   bdaylabel.text = formatter.string(from: birthday)
+               }
+           }
+           
+           @objc func dismissKeyboard() {
+               view.endEditing(true)
+           }
+           
+         
+    @objc func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+               textField.resignFirstResponder()
+               return true
+           }
 
-        override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
-            unregisterKeyboardNotifications()
-        }
-    
-
-        func registerKeyboardNotifications() {
-            NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        }
-
-        func unregisterKeyboardNotifications() {
-            NotificationCenter.default.removeObserver(self)
-        }
-
-        @objc func keyboardDidShow(notification: Notification) {
-            guard let userInfo = notification.userInfo,
-                  let keyboardInfo = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {
-                return
-            }
-            let keyboardSize = keyboardInfo.cgRectValue.size
-            var contentInset = self.scrollView.contentInset
-            contentInset.bottom = keyboardSize.height
-            self.scrollView.contentInset = contentInset
-            self.scrollView.scrollIndicatorInsets = contentInset
-        }
-
-        @objc func keyboardWillHide(notification: Notification) {
-            var contentInset = self.scrollView.contentInset
-            contentInset.bottom = 0
-            self.scrollView.contentInset = contentInset
-            self.scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
-        }
-
-        @objc func dismissKeyboard() {
-            view.endEditing(true)
-        }
-    @IBAction func changeEditMode(_ sender: UISegmentedControl){
-        let textFields: [UITextField] = [textFieldContact, textFieldAddress, textFieldEmail, textFieldCity, textFieldState, textFieldZipCode, textFieldCellPhone, textFieldHomePhone]
-        if sender.selectedSegmentIndex == 0 {
-            for textField in textFields {
-                textField.isEnabled = false
-                textField.borderStyle = .none
-            }
-            btnChange.isHidden = false
-            navigationItem.rightBarButtonItem = nil
-        } else if sender.selectedSegmentIndex == 1 {
-            for textField in textFields {
-                textField.isEnabled = true
-                textField.borderStyle = .roundedRect
-            }
-            btnChange.isHidden = false
-            navigationItem.rightBarButtonItem=UIBarButtonItem(barButtonSystemItem:.save, target: self, action: #selector(self.saveContact))
-        }
-    }
+           @objc func keyboardDidShow(notification: Notification) {
+               guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+                   return
+               }
+               let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+               scrollView.contentInset = contentInsets
+               scrollView.scrollIndicatorInsets = contentInsets
+           }
+           
+           @objc func keyboardWillHide(notification: Notification) {
+               scrollView.contentInset = .zero
+               scrollView.scrollIndicatorInsets = .zero
+           }
 
 
-    
-}
+           
+           @IBAction func changeEditMode(_ sender: UISegmentedControl) {
+               let textFields: [UITextField] = [textFieldContact, textFieldAddress, textFieldEmail, textFieldCity, textFieldState, textFieldZipCode, textFieldCellPhone, textFieldHomePhone]
+               if sender.selectedSegmentIndex == 0 {
+                   for textField in textFields {
+                       textField.isEnabled = false
+                       textField.borderStyle = .none
+                   }
+                   btnChange.isHidden = false
+                   navigationItem.rightBarButtonItem = nil
+               } else if sender.selectedSegmentIndex == 1 {
+                   for textField in textFields {
+                       textField.isEnabled = true
+                       textField.borderStyle = .roundedRect
+                   }
+                   btnChange.isHidden = false
+                   navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveContact))
+               }
+           }
+           
+           @objc func saveContact() {
+               if currentContact == nil {
+                           let context = appDelegate.persistentContainer.viewContext
+                           currentContact = Contact(context: context)
+                       }
+                       
+                       currentContact?.contactName = textFieldContact.text
+                       currentContact?.streetAddress = textFieldAddress.text
+                       currentContact?.city = textFieldCity.text
+                       currentContact?.state = textFieldState.text
+                       currentContact?.zipCode = textFieldZipCode.text
+                       currentContact?.cellNumber = textFieldCellPhone.text
+                       currentContact?.homeNumber = textFieldHomePhone.text
+                       currentContact?.email = textFieldEmail.text
+                       
+                       appDelegate.saveContext()
+                       
+                       sgmtEditMode.selectedSegmentIndex = 0
+                       changeEditMode(sgmtEditMode)
+                   }
+                   
+                   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+                       if segue.identifier == "segueContactDate" {
+                           if let dateController = segue.destination as? DateViewController {
+                               dateController.delegate = self
+                           }
+                       }
+                   }
+           
+           func didSelectDate(_ date: Date) {
+               if currentContact == nil {
+                   let context = appDelegate.persistentContainer.viewContext
+                   currentContact = Contact(context: context)
+               }
+               currentContact?.birthday = date
+               let formatter = DateFormatter()
+               formatter.dateStyle = .short
+               bdaylabel.text = formatter.string(from: date)
+           }
+           
+           override func viewWillDisappear(_ animated: Bool) {
+               super.viewWillDisappear(animated)
+               unregisterKeyboardNotifications()
+           }
+
+           func registerKeyboardNotifications() {
+               NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+               NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+           }
+
+           func unregisterKeyboardNotifications() {
+               NotificationCenter.default.removeObserver(self)
+           }
+       }
     /*
     // MARK: - Navigation
 

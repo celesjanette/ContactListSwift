@@ -14,19 +14,33 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadDataFromDatabase()
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
+        //loadDataFromDatabase()
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        loadDataFromDatabase()
+        tableView.reloadData()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     func loadDataFromDatabase(){
+      
+        let settings = UserDefaults.standard
+        let sortField = settings.string(forKey: Constants.kSortField)
+        let sortAscending = settings.bool(forKey: Constants.kSortDirectionAscending)
+       
         let context = appDelegate.persistentContainer.viewContext
-        let request = NSFetchRequest<NSManagedObject> (entityName: "Contact")
-        do{
+        let request = NSFetchRequest<NSManagedObject>(entityName: "Contact")
+        let sortDescriptor = NSSortDescriptor(key: sortField, ascending: sortAscending)
+        let sortDescriptorArray = [sortDescriptor]
+        request.sortDescriptors = sortDescriptorArray
+        
+        do {
             contact = try context.fetch(request)
-        } catch let error as NSError{
-            print ("Could not fetch. \(error), \(error.userInfo)")
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
     // MARK: - Table view data source
@@ -44,9 +58,42 @@ class TableViewController: UITableViewController {
         let contact = contact[indexPath.row] as? Contact
         cell.textLabel?.text = contact?.contactName
         cell.detailTextLabel?.text = contact?.city
+        cell.accessoryType =  .detailDisclosureButton
         return cell
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EditContact" {
+            let contactController = segue.destination as? ContactsViewController
+            let selectedRow = self.tableView.indexPath(for: sender as! UITableViewCell)?.row
+            let selectedContact = contact[selectedRow!] as? Contact
+            contactController?.currentContact = selectedContact!
+        }
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedContact = contact[indexPath.row] as? Contact
+        let name = selectedContact!.contactName!
+        let actionHandler = { (action:UIAlertAction!) -> Void in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "ContactController")
+                as? ContactsViewController
+            controller?.currentContact = selectedContact
+            self.navigationController?.pushViewController(controller!, animated: true)
+        }
+        
+        let alertController = UIAlertController(title: "Contact selected",
+                                                message:  "Selected row: \(indexPath.row) (\(name))",
+            preferredStyle: .alert)
+        
+        let actionCancel = UIAlertAction(title: "Cancel",
+                                         style: .cancel,
+                                         handler: nil)
+        let actionDetails = UIAlertAction(title: "Show Details",
+                                          style: .default,
+                                          handler: actionHandler)
+        alertController.addAction(actionCancel)
+        alertController.addAction(actionDetails)
+        present(alertController, animated: true, completion: nil)
+    }
     
     /*
      // Override to support conditional editing of the table view.
@@ -56,17 +103,28 @@ class TableViewController: UITableViewController {
      }
      */
     
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
+   
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            let contact = contact[indexPath.row] as? Contact
+            let context = appDelegate.persistentContainer.viewContext
+            context.delete(contact!)
+            do{
+                try context.save()
+            }
+            catch{
+                fatalError("Error saving context: \(error)")
+            }
+            loadDataFromDatabase()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+   
+
+    }
+   
     
     /*
      // Override to support rearranging the table view.
