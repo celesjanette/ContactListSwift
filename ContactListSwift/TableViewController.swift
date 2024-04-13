@@ -55,12 +55,32 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactsCell", for: indexPath)
+               let contact = contact[indexPath.row] as? Contact
+               
+        
+               let mainLabelText = "\(contact?.contactName ?? "") Phone Number \(contact?.cellNumber ?? "")"
+               cell.textLabel?.text = mainLabelText
+               
+               if let birthday = contact?.birthday {
+                   let formatter = DateFormatter()
+                   formatter.dateStyle = .medium
+                   let detailLabelText = "Born on: \(formatter.string(from: birthday))"
+                   cell.detailTextLabel?.text = detailLabelText
+               } else {
+                   cell.detailTextLabel?.text = ""
+               }
+               
+               cell.accessoryType = .detailDisclosureButton
+               return cell
+           }
+           
+        /*let cell = tableView.dequeueReusableCell(withIdentifier: "ContactsCell", for: indexPath)
         let contact = contact[indexPath.row] as? Contact
         cell.textLabel?.text = contact?.contactName
         cell.detailTextLabel?.text = contact?.city
         cell.accessoryType =  .detailDisclosureButton
         return cell
-    }
+    }*/
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditContact" {
             let contactController = segue.destination as? ContactsViewController

@@ -13,14 +13,75 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBOutlet weak var swAscending: UISwitch!
     let sortOrderItems: [String] = ["contactName", "city", "birthday"]
+    
+    @IBOutlet weak var batteryLabel: UILabel!
     var settings = UserDefaults.standard
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         pckSortField.dataSource = self
         pckSortField.delegate = self
         loadSettings()
-        // Do any additional setup after loading the view.
+        
+        // device information
+        let device = UIDevice.current
+        print("Device Info:")
+        print("Name: \(device.name)")
+        print("Model: \(device.model)")
+        print("System Name: \(device.systemName)")
+        print("Identifier: \(device.systemVersion)")
+        
+        
+        let orientation: String
+        switch device.orientation{
+        case.faceDown:
+            orientation = "Face Down"
+        case.landscapeLeft:
+            orientation = "Landscape Left"
+        case.portrait:
+            orientation = "Portrait"
+        case.landscapeRight:
+            orientation = "Landscape Right"
+        case.faceUp:
+            orientation = "Face Up"
+        case.portraitUpsideDown:
+            orientation = " Portrait Upside Down"
+        case.unknown:
+            orientation = " Unknown Orientation"
+        @unknown default:
+            fatalError()
+        }
+        print("Orientation: \(orientation)")
+        
+        pckSortField.dataSource = self;
+        pckSortField.delegate = self;
+        
+        UIDevice.current.isBatteryMonitoringEnabled = true
+           NotificationCenter.default.addObserver(self, selector: #selector(batteryChanged), name: UIDevice.batteryStateDidChangeNotification, object: nil)
+           NotificationCenter.default.addObserver(self, selector: #selector(batteryChanged), name: UIDevice.batteryLevelDidChangeNotification, object: nil)
+           self.batteryChanged()
+        
+        }
+    @objc func batteryChanged(){
+        let device = UIDevice.current
+        var batteryState: String
+        switch device.batteryState {
+            case .charging:
+                batteryState = "+"
+            case .full:
+                batteryState = "!"
+            case .unplugged:
+                batteryState = "-"
+            case .unknown:
+                batteryState = "?"
+
+        }
+        let batteryLevelPercent = device.batteryLevel * 100
+        let batteryLevel = String(format: "%.0f%%", batteryLevelPercent)
+        let batteryStaus = "\(batteryLevel) (\(batteryState))"
+        batteryLabel.text = batteryStaus
     }
+    
     
     @IBAction func sortDirectionChanged(_ sender: Any) {
         let settings = UserDefaults.standard
@@ -69,7 +130,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         let settings = UserDefaults.standard
         
         if settings.string(forKey: Constants.kSortField) == nil {
-            settings.set("City", forKey: Constants.kSortField)
+            settings.set("city", forKey: Constants.kSortField)
         }
         
         if settings.string(forKey: Constants.kSortDirectionAscending) == nil {

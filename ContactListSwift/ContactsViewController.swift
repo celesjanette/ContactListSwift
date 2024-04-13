@@ -7,7 +7,7 @@
 
 import UIKit
 import CoreData
-class ContactsViewController: UIViewController, DateControllerDelegate, UITextFieldDelegate {
+class ContactsViewController: UIViewController, DateControllerDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     var currentContact: Contact?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -24,10 +24,14 @@ class ContactsViewController: UIViewController, DateControllerDelegate, UITextFi
         @IBOutlet weak var sgmtEditMode: UISegmentedControl!
        
     @IBOutlet weak var btnChangeDate: UIButton!
+    
+    @IBOutlet weak var imageLabel: UIImageView!
+    
     @IBOutlet weak var bdaylabel: UILabel!
     
     @IBOutlet weak var btnChange: UISegmentedControl!
     
+    @IBOutlet weak var phoneLabel: UIStackView!
     
     
     override func viewDidLoad() {
@@ -44,10 +48,15 @@ class ContactsViewController: UIViewController, DateControllerDelegate, UITextFi
             
                registerKeyboardNotifications()
                
-               if let contact = currentContact {
-                   populateFields(with: contact)
-               }
-           }
+        if let contact = currentContact {
+                    populateFields(with: contact)
+                    if let imageData = currentContact?.image as? Data {
+                        imageLabel.image = UIImage(data: imageData)
+                        
+                       
+                    }
+                }
+            }
            
            func populateFields(with contact: Contact) {
                textFieldContact.text = contact.contactName
@@ -64,12 +73,27 @@ class ContactsViewController: UIViewController, DateControllerDelegate, UITextFi
                    formatter.dateStyle = .short
                    bdaylabel.text = formatter.string(from: birthday)
                }
+               if let imageData = currentContact?.image {
+                   imageLabel.image = UIImage(data: imageData)
+               }
+               let longPress = UILongPressGestureRecognizer.init(target: self,
+                                                                 action: #selector(callPhone(gesture:)))
+               phoneLabel.addGestureRecognizer(longPress)
+           
            }
            
            @objc func dismissKeyboard() {
                view.endEditing(true)
            }
-           
+    @objc func callPhone(gesture: UILongPressGestureRecognizer) {
+       if gesture.state == .began {
+           let number = textFieldCellPhone.text
+           if number!.count > 0 {
+               let url = URL(string: "telprompt://\(number!)")
+               UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+           }
+       }
+   }
          
     @objc func textFieldShouldReturn(_ textField: UITextField) -> Bool {
                textField.resignFirstResponder()
@@ -132,7 +156,33 @@ class ContactsViewController: UIViewController, DateControllerDelegate, UITextFi
                        changeEditMode(sgmtEditMode)
                    }
                    
-                   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    @IBAction func takePicture(_ sender: Any) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            let cameraController = UIImagePickerController()
+            cameraController.sourceType = .camera
+            cameraController.cameraCaptureMode = .photo
+            cameraController.delegate = self
+            cameraController.allowsEditing = true
+            self.present(cameraController, animated: true, completion: nil)
+        }
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[.editedImage] as? UIImage {
+                imageLabel.contentMode = .scaleAspectFit
+                imageLabel.image = image
+                if currentContact == nil {
+                    let context = appDelegate.persistentContainer.viewContext
+                    currentContact = Contact(context: context)
+                }
+                currentContact?.image = image.jpegData(compressionQuality: 1.0)
+                dismiss(animated: true, completion: nil)
+            }
+        }
+        
+         
+        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
                        if segue.identifier == "segueContactDate" {
                            if let dateController = segue.destination as? DateViewController {
                                dateController.delegate = self
